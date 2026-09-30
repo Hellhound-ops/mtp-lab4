@@ -15,10 +15,13 @@ def weighted_sum(a: int, b: int, c: int) -> int:
 def main() -> None:
     parser = argparse.ArgumentParser(description="ЛР №4, вариант 3")
     parser.add_argument(
-        "--task", choices=["all", "sum", "fibonacci", "random", "curry", "stream"],
+        "--task",
+        choices=["all", "sum", "fibonacci", "random", "curry", "stream"],
         default="all",
     )
-    parser.add_argument("--numbers", type=int, nargs="*", default=[7, -2, 10, 5])
+    parser.add_argument(
+        "--numbers", type=int, nargs="*", default=[7, -2, 10, 5]
+    )
     parser.add_argument("--count", type=int, default=8)
     parser.add_argument("--low", type=int, default=1)
     parser.add_argument("--high", type=int, default=20)
@@ -40,8 +43,10 @@ def main() -> None:
         print(list(islice(fibonacci(), args.count)))
     if args.task in ("all", "random"):
         print("Среднее №9. Случайные числа в диапазоне:")
-        print(list(random_numbers(args.low, args.high, args.count,
-                                  seed=args.seed)))
+        values = random_numbers(
+            args.low, args.high, args.count, seed=args.seed
+        )
+        print(list(values))
     if args.task in ("all", "curry"):
         curried = curry(weighted_sum)
         with_a = curried(args.a)
